@@ -121,8 +121,11 @@
         :class="scrolled ? 'glass shadow-md py-2' : 'bg-transparent py-4'"
         @scroll.window="scrolled = (window.pageYOffset > 20)">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-2">
-                <span class="text-2xl font-serif font-black tracking-tighter"
+            <a href="#" class="flex items-center gap-3">
+                <img src="assets/vallesurlogo.png" alt="Vallesur Logo" 
+                    class="h-12 w-auto transition-all duration-300"
+                    :class="scrolled ? 'h-10' : 'h-12'">
+                <span class="text-2xl font-serif font-black tracking-tighter hidden sm:inline"
                     :class="scrolled ? 'text-primary' : 'text-white'">VALLESUR</span>
             </a>
 
@@ -244,6 +247,9 @@
                                 class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
                                 $ <span x-text="product.price.toLocaleString('es-CL')"></span> / kg
                             </div>
+                            <div class="absolute bottom-3 right-3 w-24 h-24 opacity-80 hover:opacity-100 transition-opacity">
+                                <img src="assets/caja.png" alt="Caja de empaque" class="w-full h-full object-contain drop-shadow-lg">
+                            </div>
                         </div>
                         <div class="p-6">
                             <span class="text-xs font-bold text-secondary uppercase tracking-widest mb-2 block"
@@ -258,6 +264,32 @@
                         </div>
                     </div>
                 </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Production Video -->
+    <section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-serif font-black text-primary mb-4">Conoce Nuestro Proceso</h2>
+                <div class="w-24 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="text-slate-600 text-lg max-w-2xl mx-auto">Mira cómo seleccionamos y congelamos nuestras frutas para mantener toda su frescura y sabor.</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative w-full rounded-3xl overflow-hidden shadow-2xl" style="padding-bottom: 56.25%; background: #000;">
+                    <iframe 
+                        id="vimeo-video"
+                        src="https://player.vimeo.com/video/1152418572?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;recommendations=0&amp;loop=1" 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        title="Vallesur - Proceso de Producción">
+                    </iframe>
+                </div>
+                <p class="text-center text-slate-500 text-sm mt-6">Mira cómo cada fruta es seleccionada con cuidado y congelada para preservar sus propiedades.</p>
             </div>
         </div>
     </section>
@@ -399,8 +431,11 @@
                 </div>
             </div>
 
-            <div class="border-t border-white/10 pt-8 text-center text-slate-400 text-sm">
-                <p>&copy; 2026 Vallesur Congelados. Todos los derechos reservados. Realizado con ❤️ para Sol Jazmin Sol.
+            <div class="border-t border-white/10 pt-8">
+                <div class="flex flex-col items-center gap-4 mb-6">
+                    <img src="assets/vallesurlogo.png" alt="Vallesur Logo" class="h-16 w-auto opacity-90 hover:opacity-100 transition-opacity">
+                </div>
+                <p class="text-center text-slate-400 text-sm">&copy; 2026 Vallesur Congelados. Todos los derechos reservados. Realizado con ❤️ para Sol Jazmin Sol.
                 </p>
             </div>
         </div>
@@ -485,8 +520,19 @@
                     </div>
 
                     <div class="border-t border-slate-200 py-6 px-4 sm:px-6 bg-slate-50" x-show="cartItems.length > 0">
-                        <!-- Checkout Form -->
-                        <div class="mb-6 space-y-3">
+                        <!-- Info sobre despacho -->
+                        <div class="mb-6 p-4 rounded-xl" :class="totalWeight >= 10 ? 'bg-secondary/10 border border-secondary/30' : 'bg-primary/10 border border-primary/30'">
+                            <p class="text-sm font-bold" :class="totalWeight >= 10 ? 'text-secondary' : 'text-primary'">
+                                <span x-text="totalWeight.toFixed(1)"></span> kg en tu carrito
+                            </p>
+                            <p class="text-xs mt-2" :class="totalWeight >= 10 ? 'text-slate-600' : 'text-slate-600'">
+                                <span x-show="totalWeight >= 10">Despacho a domicilio: $3.000</span>
+                                <span x-show="totalWeight < 10">Retiro en San Bernardo (Sin costo)</span>
+                            </p>
+                        </div>
+
+                        <!-- Checkout Form (solo si peso >= 10kg) -->
+                        <div class="mb-6 space-y-3" x-show="totalWeight >= 10">
                             <h4 class="font-bold text-slate-700 mb-2">Datos de Despacho</h4>
                             <input type="text" x-model="checkout.name" placeholder="Nombre Completo"
                                 class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
@@ -496,19 +542,26 @@
                                 class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
                         </div>
 
+                        <!-- Solo nombre si retiro (peso < 10kg) -->
+                        <div class="mb-6 space-y-3" x-show="totalWeight < 10">
+                            <h4 class="font-bold text-slate-700 mb-2">Datos del Cliente</h4>
+                            <input type="text" x-model="checkout.name" placeholder="Nombre Completo"
+                                class="w-full px-4 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
+                        </div>
+
                         <div class="space-y-2 mb-6">
                             <div class="flex justify-between text-base text-slate-600">
                                 <p>Subtotal</p>
                                 <p>$ <span x-text="cartSubtotal.toLocaleString('es-CL')"></span></p>
                             </div>
                             <div class="flex justify-between text-base text-slate-600">
-                                <p>Despacho (Fijo)</p>
-                                <p>$ 3.000</p>
+                                <p x-text="totalWeight >= 10 ? 'Despacho a Domicilio' : 'Retiro'"></p>
+                                <p>$ <span x-text="shippingCost.toLocaleString('es-CL')"></span></p>
                             </div>
                             <div
                                 class="flex justify-between text-xl font-black text-primary pt-2 border-t border-slate-200">
                                 <p>Total</p>
-                                <p>$ <span x-text="(cartSubtotal + 3000).toLocaleString('es-CL')"></span></p>
+                                <p>$ <span x-text="totalAmount.toLocaleString('es-CL')"></span></p>
                             </div>
                         </div>
 
@@ -546,14 +599,15 @@
                     comuna: ''
                 },
                 products: [
-                    { id: 1, name: "Arándanos", price: 4000, category: "Berries", image: "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?auto=format&fit=crop&q=80&w=800", description: "Arándanos seleccionados de primera calidad, 100% naturales y congelados." },
-                    { id: 2, name: "Frambuesas", price: 6000, category: "Berries", image: "https://images.unsplash.com/photo-1577069861033-55d04cec4ef5?fm=jpg&q=60&w=800", description: "Frambuesas rojas y jugosas, ideales para postres y batidos." },
-                    { id: 3, name: "Frutillas", price: 3500, category: "Berries", image: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&q=80&w=800", description: "Frutillas dulces y aromáticas, seleccionadas manualmente." },
-                    { id: 4, name: "Mango", price: 5000, category: "Frutas Tropicales", image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&q=80&w=800", description: "Mango en cubos, listo para consumir o preparar jugos tropicales." },
-                    { id: 5, name: "Maracuyá", price: 6000, category: "Frutas Tropicales", image: "https://images.unsplash.com/photo-1616077498072-ccba9b178fa5?fm=jpg&q=60&w=800", description: "Maracuyá con pepas, sabor intenso y natural." },
-                    { id: 6, name: "Melón Calameño", price: 4000, category: "Frutas Tropicales", image: "https://images.unsplash.com/photo-1571575173700-afb9492e6a50?auto=format&fit=crop&q=80&w=800", description: "Melón calameño en trozos, refrescante y natural." },
-                    { id: 7, name: "Mix de Berries", price: 4500, category: "Berries", image: "https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?fm=jpg&q=60&w=800", description: "Combinación perfecta de arándanos, frambuesas y moras." },
-                    { id: 8, name: "Pulpa de Mango", price: 5500, category: "Pulpas", image: "https://images.unsplash.com/photo-1591073113125-e46713c829ed?auto=format&fit=crop&q=80&w=800", description: "Pulpa de mango 100% natural, sin azúcar añadida." }
+                    { id: 1, name: "Arándanos", price: 4000, category: "Berries", image: "assets/arandanos.jpeg", description: "Arándanos seleccionados de primera calidad, 100% naturales y congelados." },
+                    { id: 2, name: "Frambuesas", price: 6000, category: "Berries", image: "assets/frambuezagrande.jpeg", description: "Frambuesas rojas y jugosas, ideales para postres y batidos." },
+                    { id: 3, name: "Frutillas", price: 3500, category: "Berries", image: "assets/frutillas.png", description: "Frutillas dulces y aromáticas, seleccionadas manualmente." },
+                    { id: 4, name: "Mango", price: 5000, category: "Frutas Tropicales", image: "assets/mango.jpeg", description: "Mango en cubos, listo para consumir o preparar jugos tropicales." },
+                    { id: 5, name: "Maracuyá", price: 6000, category: "Frutas Tropicales", image: "assets/maracuya.png", description: "Maracuyá con pepas, sabor intenso y natural." },
+                    { id: 6, name: "Melón Calameño", price: 4000, category: "Frutas Tropicales", image: "assets/meloncalameño.png", description: "Melón calameño en trozos, refrescante y natural." },
+                    { id: 7, name: "Mix de Berries", price: 4500, category: "Berries", image: "assets/mixberries.jpeg", description: "Combinación perfecta de arándanos, frambuesas y moras." },
+                    { id: 8, name: "Pulpa de Mango", price: 5500, category: "Pulpas", image: "assets/pulpademango.png", description: "Pulpa de mango 100% natural, sin azúcar añadida." },
+                    { id: 9, name: "Piña", price: 4000, category: "Frutas Tropicales", image: "assets/piña.png", description: "Piña congelada en trozos, tropical y refrescante, perfecta para batidos y postres." }
                 ],
                 faqs: [
                     { q: "¿Cómo se mantienen congelados los productos durante el despacho?", a: "Utilizamos cajas térmicas y gel pack para asegurar que la cadena de frío no se rompa durante el trayecto a tu hogar.", open: false },
@@ -571,8 +625,25 @@
                     return this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 },
 
+                get totalWeight() {
+                    return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                },
+
+                get shippingCost() {
+                    return this.totalWeight >= 10 ? 3000 : 0;
+                },
+
+                get totalAmount() {
+                    return this.cartSubtotal + this.shippingCost;
+                },
+
                 get isCheckoutValid() {
-                    return this.checkout.name && this.checkout.address && this.checkout.comuna && this.cartItems.length > 0;
+                    if (this.cartItems.length === 0) return false;
+                    if (this.totalWeight >= 10) {
+                        return this.checkout.name && this.checkout.address && this.checkout.comuna;
+                    } else {
+                        return this.checkout.name;
+                    }
                 },
 
                 addToCart(product) {
@@ -612,17 +683,29 @@
                 sendToWhatsApp() {
                     let message = `*NUEVO PEDIDO - VALLESUR*\n\n`;
                     message += `*Cliente:* ${this.checkout.name}\n`;
-                    message += `*Dirección:* ${this.checkout.address}, ${this.checkout.comuna}\n\n`;
-                    message += `*Detalle del Pedido:*\n`;
+                    
+                    if (this.totalWeight >= 10) {
+                        message += `*Dirección de Despacho:* ${this.checkout.address}, ${this.checkout.comuna}\n`;
+                        message += `*Tipo de Entrega:* Despacho a Domicilio\n`;
+                    } else {
+                        message += `*Tipo de Entrega:* Retiro en San Bernardo\n`;
+                    }
+                    
+                    message += `\n*Detalle del Pedido:*\n`;
 
                     this.cartItems.forEach(item => {
                         message += `- ${item.quantity}kg x ${item.name} ($${(item.price * item.quantity).toLocaleString('es-CL')})\n`;
                     });
 
                     message += `\n*Subtotal:* $${this.cartSubtotal.toLocaleString('es-CL')}\n`;
-                    message += `*Despacho:* $3.000\n`;
-                    message += `*TOTAL:* $${(this.cartSubtotal + 3000).toLocaleString('es-CL')}\n\n`;
-                    message += `_Por favor, confírmame los datos para coordinar la entrega._`;
+                    message += `*${this.totalWeight >= 10 ? 'Despacho' : 'Retiro'}:* $${this.shippingCost.toLocaleString('es-CL')}\n`;
+                    message += `*TOTAL:* $${this.totalAmount.toLocaleString('es-CL')}\n\n`;
+                    
+                    if (this.totalWeight >= 10) {
+                        message += `_Por favor, confírmame los datos para coordinar la entrega._`;
+                    } else {
+                        message += `_Por favor, confírmame el horario para el retiro._`;
+                    }
 
                     const encodedMessage = encodeURIComponent(message);
                     window.open(`https://wa.me/56967250233?text=${encodedMessage}`, '_blank');
@@ -633,6 +716,42 @@
                     AOS.init({
                         duration: 1000,
                         once: true,
+                    });
+                    this.initVideoControls();
+                },
+
+                initVideoControls() {
+                    const videoFrame = document.getElementById('vimeo-video');
+                    if (!videoFrame) return;
+
+                    // Intersection Observer para pausa/play automática
+                    const videoContainer = videoFrame.parentElement;
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                // Video es visible, enviar mensaje para autoplay
+                                videoFrame.contentWindow.postMessage({ method: 'play' }, '*');
+                            } else {
+                                // Video no es visible, enviar mensaje para pausar
+                                videoFrame.contentWindow.postMessage({ method: 'pause' }, '*');
+                            }
+                        });
+                    }, { threshold: 0.3 });
+
+                    observer.observe(videoContainer);
+
+                    // Pausa cuando se pierde el focus de la ventana
+                    window.addEventListener('blur', () => {
+                        videoFrame.contentWindow.postMessage({ method: 'pause' }, '*');
+                    });
+
+                    // Resume cuando vuelve el focus
+                    window.addEventListener('focus', () => {
+                        // Verificar si el video está visible
+                        const rect = videoContainer.getBoundingClientRect();
+                        if (rect.top < window.innerHeight && rect.bottom > 0) {
+                            videoFrame.contentWindow.postMessage({ method: 'play' }, '*');
+                        }
                     });
                 }
             }
