@@ -305,8 +305,8 @@
                         src="https://player.vimeo.com/video/1152418572?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;recommendations=0&amp;loop=1&amp;controls=1&amp;muted=0&amp;background=0"
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                        allowfullscreen
-                        referrerpolicy="strict-origin-when-cross-origin" title="Vallesur - Proceso de Producción">
+                        allowfullscreen referrerpolicy="strict-origin-when-cross-origin"
+                        title="Vallesur - Proceso de Producción">
                     </iframe>
                 </div>
                 <p class="text-center text-slate-500 text-sm mt-6">Mira cómo cada fruta es seleccionada con cuidado y
@@ -483,30 +483,33 @@
                 x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full">
                 <div class="h-full flex flex-col bg-white shadow-2xl">
                     <!-- Header del Carrito -->
-                    <div class="flex-shrink-0 px-4 sm:px-6 py-5 border-b border-slate-200 bg-gradient-to-r from-primary/5 to-secondary/5">
+                    <div
+                        class="flex-shrink-0 px-4 sm:px-6 py-5 border-b border-slate-200 bg-gradient-to-r from-primary/5 to-secondary/5">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-3 sm:gap-4">
                                 <div class="flex-shrink-0">
-                                    <img src="assets/vallesurlogo.png" alt="Vallesur Logo" 
+                                    <img src="assets/vallesurlogo.png" alt="Vallesur Logo"
                                         class="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 object-contain drop-shadow-sm">
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center gap-2 sm:gap-3">
-                                        <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-black text-primary leading-tight">
+                                        <h2
+                                            class="text-xl sm:text-2xl md:text-3xl font-serif font-black text-primary leading-tight">
                                             Tu Pedido
                                         </h2>
                                         <div class="hidden sm:flex items-center gap-1.5" x-show="cartItems.length > 0">
                                             <span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                                            <span class="text-xs font-bold text-secondary" x-text="cartItems.length"></span>
+                                            <span class="text-xs font-bold text-secondary"
+                                                x-text="cartItems.length"></span>
                                         </div>
                                     </div>
                                     <p class="text-xs sm:text-sm text-slate-500 mt-0.5" x-show="cartItems.length > 0">
-                                        <span x-text="cartItems.length"></span> 
+                                        <span x-text="cartItems.length"></span>
                                         <span x-text="cartItems.length === 1 ? 'producto' : 'productos'"></span>
                                     </p>
                                 </div>
                             </div>
-                            <button @click="cartOpen = false" 
+                            <button @click="cartOpen = false"
                                 class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-white transition-all flex-shrink-0">
                                 <i class="fa-solid fa-xmark text-xl"></i>
                             </button>
@@ -521,44 +524,51 @@
                                     <li class="py-4 sm:py-6">
                                         <div class="flex gap-3 sm:gap-4">
                                             <!-- Imagen del Producto -->
-                                            <div class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 flex-shrink-0 overflow-hidden rounded-xl border-2 border-slate-100 shadow-sm">
+                                            <div
+                                                class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 flex-shrink-0 overflow-hidden rounded-xl border-2 border-slate-100 shadow-sm">
                                                 <img :src="item.image" :alt="item.name"
                                                     class="h-full w-full object-cover">
                                             </div>
-                                            
+
                                             <!-- Información del Producto -->
                                             <div class="flex-1 min-w-0 flex flex-col justify-between">
                                                 <div class="flex-1">
                                                     <div class="flex items-start justify-between gap-2 mb-1">
                                                         <div class="flex-1 min-w-0">
-                                                            <h3 class="text-sm sm:text-base font-bold text-slate-900 truncate" x-text="item.name"></h3>
-                                                            <p class="text-xs text-slate-500 mt-0.5" x-text="item.category"></p>
+                                                            <h3 class="text-sm sm:text-base font-bold text-slate-900 truncate"
+                                                                x-text="item.name"></h3>
+                                                            <p class="text-xs text-slate-500 mt-0.5"
+                                                                x-text="item.category"></p>
                                                         </div>
                                                         <button @click="removeFromCart(item.id)"
                                                             class="p-1.5 text-slate-400 hover:text-secondary hover:bg-secondary/10 rounded-lg transition-all flex-shrink-0">
                                                             <i class="fa-solid fa-trash-can text-xs sm:text-sm"></i>
                                                         </button>
                                                     </div>
-                                                    
+
                                                     <!-- Precio -->
                                                     <div class="mt-2 mb-3">
                                                         <p class="text-sm sm:text-base font-black text-primary">
-                                                            $<span x-text="item.price.toLocaleString('es-CL')"></span> / kg
+                                                            $<span x-text="item.price.toLocaleString('es-CL')"></span> /
+                                                            kg
                                                         </p>
                                                         <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
-                                                            Total: $<span x-text="(item.price * item.quantity).toLocaleString('es-CL')"></span>
+                                                            Total: $<span
+                                                                x-text="(item.price * item.quantity).toLocaleString('es-CL')"></span>
                                                         </p>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <!-- Controles de Cantidad -->
                                                 <div class="flex items-center justify-between mt-3">
-                                                    <div class="flex items-center gap-2 sm:gap-3 bg-slate-100 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2">
+                                                    <div
+                                                        class="flex items-center gap-2 sm:gap-3 bg-slate-100 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2">
                                                         <button @click="updateQuantity(item.id, -1)"
                                                             class="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-md hover:bg-white hover:text-primary transition-all text-slate-600 hover:shadow-sm">
                                                             <i class="fa-solid fa-minus text-xs"></i>
                                                         </button>
-                                                        <span class="font-black text-sm sm:text-base text-slate-900 w-6 sm:w-8 text-center" 
+                                                        <span
+                                                            class="font-black text-sm sm:text-base text-slate-900 w-6 sm:w-8 text-center"
                                                             x-text="item.quantity"></span>
                                                         <span class="text-xs text-slate-500 hidden sm:inline">kg</span>
                                                         <button @click="updateQuantity(item.id, 1)"
@@ -571,15 +581,17 @@
                                         </div>
                                     </li>
                                 </template>
-                                
+
                                 <!-- Carrito Vacío -->
                                 <li x-show="cartItems.length === 0" class="py-12 sm:py-16 text-center">
-                                    <div class="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-300">
+                                    <div
+                                        class="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-300">
                                         <i class="fa-solid fa-bag-shopping text-4xl sm:text-5xl"></i>
                                     </div>
-                                    <p class="text-slate-600 font-semibold mb-2 text-base sm:text-lg">Tu carrito está vacío</p>
+                                    <p class="text-slate-600 font-semibold mb-2 text-base sm:text-lg">Tu carrito está
+                                        vacío</p>
                                     <p class="text-sm text-slate-500 mb-6">Agrega productos para comenzar tu pedido</p>
-                                    <button @click="cartOpen = false" 
+                                    <button @click="cartOpen = false"
                                         class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg">
                                         Ir a comprar
                                     </button>
@@ -589,22 +601,23 @@
                     </div>
 
                     <!-- Footer del Carrito (Checkout) -->
-                    <div class="flex-shrink-0 border-t border-slate-200 py-4 sm:py-6 px-4 sm:px-6 bg-gradient-to-b from-white to-slate-50" x-show="cartItems.length > 0">
+                    <div class="flex-shrink-0 border-t border-slate-200 py-4 sm:py-6 px-4 sm:px-6 bg-gradient-to-b from-white to-slate-50"
+                        x-show="cartItems.length > 0">
                         <!-- Info sobre despacho -->
                         <div class="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl shadow-sm"
                             :class="totalWeight >= 10 ? 'bg-gradient-to-r from-secondary/10 to-secondary/5 border-2 border-secondary/30' : 'bg-gradient-to-r from-primary/10 to-primary/5 border-2 border-primary/30'">
                             <div class="flex items-center gap-2 mb-2">
-                                <i class="fa-solid fa-weight-hanging text-sm" 
+                                <i class="fa-solid fa-weight-hanging text-sm"
                                     :class="totalWeight >= 10 ? 'text-secondary' : 'text-primary'"></i>
-                                <p class="text-sm sm:text-base font-black" 
+                                <p class="text-sm sm:text-base font-black"
                                     :class="totalWeight >= 10 ? 'text-secondary' : 'text-primary'">
                                     <span x-text="totalWeight.toFixed(1)"></span> kg en tu carrito
                                 </p>
                             </div>
                             <div class="flex items-start gap-2">
-                                <i class="fa-solid fa-truck text-xs mt-0.5" 
+                                <i class="fa-solid fa-truck text-xs mt-0.5"
                                     :class="totalWeight >= 10 ? 'text-secondary' : 'text-primary'"></i>
-                                <p class="text-xs sm:text-sm leading-relaxed" 
+                                <p class="text-xs sm:text-sm leading-relaxed"
                                     :class="totalWeight >= 10 ? 'text-slate-700' : 'text-slate-600'">
                                     <span x-show="totalWeight >= 10">
                                         <span class="font-semibold">Despacho a domicilio disponible</span><br>
@@ -649,16 +662,19 @@
                                     <i class="fa-solid fa-receipt text-xs"></i>
                                     <span>Subtotal</span>
                                 </span>
-                                <span class="font-semibold">$<span x-text="cartSubtotal.toLocaleString('es-CL')"></span></span>
+                                <span class="font-semibold">$<span
+                                        x-text="cartSubtotal.toLocaleString('es-CL')"></span></span>
                             </div>
                             <div class="flex justify-between items-center text-sm sm:text-base text-slate-600">
                                 <span class="flex items-center gap-2">
                                     <i class="fa-solid fa-truck text-xs"></i>
                                     <span x-text="totalWeight >= 10 ? 'Despacho a Domicilio' : 'Retiro'"></span>
                                 </span>
-                                <span class="font-semibold">$<span x-text="shippingCost.toLocaleString('es-CL')"></span></span>
+                                <span class="font-semibold">$<span
+                                        x-text="shippingCost.toLocaleString('es-CL')"></span></span>
                             </div>
-                            <div class="flex justify-between items-center text-lg sm:text-xl font-black text-primary pt-3 border-t-2 border-slate-200">
+                            <div
+                                class="flex justify-between items-center text-lg sm:text-xl font-black text-primary pt-3 border-t-2 border-slate-200">
                                 <span>Total</span>
                                 <span>$<span x-text="totalAmount.toLocaleString('es-CL')"></span></span>
                             </div>
@@ -700,15 +716,19 @@
                     comuna: ''
                 },
                 products: [
-                    { id: 1, name: "Arándanos", price: 4000, category: "Berries", image: "assets/arandanos.jpeg", description: "Arándanos seleccionados de primera calidad, 100% naturales y congelados." },
-                    { id: 2, name: "Frambuesas", price: 6000, category: "Berries", image: "assets/frambuezagrande.jpeg", description: "Frambuesas rojas y jugosas, ideales para postres y batidos." },
-                    { id: 3, name: "Frutillas", price: 3500, category: "Berries", image: "assets/frutillas.png", description: "Frutillas dulces y aromáticas, seleccionadas manualmente." },
-                    { id: 4, name: "Mango", price: 5000, category: "Frutas Tropicales", image: "assets/mango.jpeg", description: "Mango en cubos, listo para consumir o preparar jugos tropicales." },
-                    { id: 5, name: "Maracuyá", price: 6000, category: "Frutas Tropicales", image: "assets/maracuya.png", description: "Maracuyá con pepas, sabor intenso y natural." },
-                    { id: 6, name: "Melón Tuna", price: 4000, category: "Frutas Tropicales", image: "assets/meloncalameño.png", description: "Melón calameño en trozos, refrescante y natural." },
-                    { id: 7, name: "Mix de Berries", price: 4500, category: "Berries", image: "assets/mixberries.jpeg", description: "Combinación perfecta de arándanos, frambuesas y moras." },
-                    { id: 8, name: "Pulpa de Mango", price: 5500, category: "Pulpas", image: "assets/pulpademango.png", description: "Pulpa de mango 100% natural, sin azúcar añadida." },
-                    { id: 9, name: "Piña", price: 4000, category: "Frutas Tropicales", image: "assets/piña.png", description: "Piña congelada en trozos, tropical y refrescante, perfecta para batidos y postres." }
+                    { id: 1, name: "Arándanos", price: 4800, category: "Berries", image: "assets/arandanos.jpeg", description: "Arándanos seleccionados de primera calidad, 100% naturales y congelados." },
+                    { id: 2, name: "Frambuesas Enteras", price: 6800, category: "Berries", image: "assets/frambuezagrande.jpeg", description: "Frambuesas rojas y jugosas, ideales para postres y batidos." },
+                    { id: 3, name: "Frambuesas Crumble", price: 5500, category: "Berries", image: "assets/frambuezapicada.jpeg", description: "Frambuesas picadas premium, ideales para crumbles, tartas y decoración de postres gourmet." },
+                    { id: 4, name: "Frutillas", price: 3500, category: "Berries", image: "assets/frutillas.png", description: "Frutillas dulces y aromáticas, seleccionadas manualmente." },
+                    { id: 5, name: "Mix 4 Berries", price: 4500, category: "Berries", image: "assets/mixberries.jpeg", description: "Combinación perfecta de arándanos, frambuesas, frutillas y moras." },
+                    { id: 6, name: "Morón Cultivado", price: 3000, category: "Berries", image: "assets/moroncultivado.png", description: "Moras cultivadas de primera calidad, dulces y jugosas." },
+                    { id: 7, name: "Mango", price: 5300, category: "Frutas Tropicales", image: "assets/mango.jpeg", description: "Mango en cubos, listo para consumir o preparar jugos tropicales." },
+                    { id: 8, name: "Maracuyá", price: 6800, category: "Frutas Tropicales", image: "assets/maracuya.png", description: "Maracuyá con pepas, sabor intenso y natural." },
+                    { id: 9, name: "Melón Tuna", price: 3000, category: "Frutas Tropicales", image: "assets/melontuna.png", description: "Melón tuna en trozos, refrescante y natural." },
+                    { id: 10, name: "Melón Calameño", price: 3000, category: "Frutas Tropicales", image: "assets/meloncalameño.png", description: "Melón calameño en trozos, refrescante y natural." },
+                    { id: 11, name: "Kiwi", price: 3000, category: "Frutas Tropicales", image: "assets/kiwi.png", description: "Kiwi en rodajas, perfecto para smoothies y ensaladas de frutas." },
+                    { id: 12, name: "Piña", price: 5000, category: "Frutas Tropicales", image: "assets/piña.png", description: "Piña congelada en trozos, tropical y refrescante, perfecta para batidos y postres." },
+                    { id: 13, name: "Pulpa de Mango", price: 5500, category: "Pulpas", image: "assets/pulpademango.png", description: "Pulpa de mango 100% natural, sin azúcar añadida." }
                 ],
                 faqs: [
                     { q: "¿Cómo se mantienen congelados los productos durante el despacho?", a: "Utilizamos cajas térmicas y gel pack para asegurar que la cadena de frío no se rompa durante el trayecto a tu hogar.", open: false },
