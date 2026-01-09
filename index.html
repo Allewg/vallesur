@@ -122,8 +122,7 @@
         @scroll.window="scrolled = (window.pageYOffset > 20)">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3">
-                <img src="assets/vallesurlogo.png" alt="Vallesur Logo" 
-                    class="h-12 w-auto transition-all duration-300"
+                <img src="assets/vallesurlogo.png" alt="Vallesur Logo" class="h-12 w-auto transition-all duration-300"
                     :class="scrolled ? 'h-10' : 'h-12'">
                 <span class="text-2xl font-serif font-black tracking-tighter hidden sm:inline"
                     :class="scrolled ? 'text-primary' : 'text-white'">VALLESUR</span>
@@ -211,10 +210,32 @@
                         <i class="fa-solid fa-truck w-8 h-8"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Despacho a Domicilio</h3>
-                    <p class="text-slate-500">Llevamos la frescura hasta tu puerta en San Bernardo y alrededores.</p>
+                    <p class="text-slate-500 mb-4">Llevamos la frescura hasta tu puerta en San Bernardo y alrededores.
+                    </p>
+                    alrededores.<br><span class="text-sm font-semibold text-secondary">Válido a partir de 10
+                        kg</span></p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Packaging Image -->
+    <section class="bg-white pb-12">
+        <div class="container mx-auto px-4" data-aos="fade-up">
+            <!-- Title with red gradient -->
+            <div class="text-center mb-8">
+                <h3
+                    class="text-2xl md:text-3xl font-serif font-black bg-gradient-to-r from-secondary via-red-600 to-secondary bg-clip-text text-transparent drop-shadow-lg mb-2">
+                    Válido a partir de 10 kg
+                </h3>
+                <div class="w-32 h-1 bg-gradient-to-r from-transparent via-secondary to-transparent mx-auto"></div>
+            </div>
+
+            <!-- Image -->
+            <div class="flex justify-center">
+                <img src="assets/caja.png" alt="Caja Vallesur"
+                    class="w-64 md:w-80 object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-500">
+            </div>
     </section>
 
     <!-- Product Catalog -->
@@ -247,8 +268,10 @@
                                 class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
                                 $ <span x-text="product.price.toLocaleString('es-CL')"></span> / kg
                             </div>
-                            <div class="absolute bottom-3 right-3 w-24 h-24 opacity-80 hover:opacity-100 transition-opacity">
-                                <img src="assets/caja.png" alt="Caja de empaque" class="w-full h-full object-contain drop-shadow-lg">
+                            <div
+                                class="absolute bottom-0 right-0 w-32 h-32 opacity-80 hover:opacity-100 transition-opacity">
+                                <img src="assets/caja.png" alt="Caja de empaque"
+                                    class="w-full h-full object-contain drop-shadow-lg">
                             </div>
                         </div>
                         <div class="p-6">
@@ -274,22 +297,22 @@
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl md:text-5xl font-serif font-black text-primary mb-4">Conoce Nuestro Proceso</h2>
                 <div class="w-24 h-1 bg-secondary mx-auto mb-6"></div>
-                <p class="text-slate-600 text-lg max-w-2xl mx-auto">Mira cómo seleccionamos y congelamos nuestras frutas para mantener toda su frescura y sabor.</p>
+                <p class="text-slate-600 text-lg max-w-2xl mx-auto">Mira cómo seleccionamos y congelamos nuestras frutas
+                    para mantener toda su frescura y sabor.</p>
             </div>
-            
+
             <div class="max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                <div class="relative w-full rounded-3xl overflow-hidden shadow-2xl" style="padding-bottom: 56.25%; background: #000;">
-                    <iframe 
-                        id="vimeo-video"
-                        src="https://player.vimeo.com/video/1152418572?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;recommendations=0&amp;loop=1" 
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                        frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        title="Vallesur - Proceso de Producción">
+                <div class="relative w-full rounded-3xl overflow-hidden shadow-2xl"
+                    style="padding-bottom: 56.25%; background: #000;">
+                    <iframe id="vimeo-video"
+                        src="https://player.vimeo.com/video/1152418572?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;recommendations=0&amp;loop=1"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" title="Vallesur - Proceso de Producción">
                     </iframe>
                 </div>
-                <p class="text-center text-slate-500 text-sm mt-6">Mira cómo cada fruta es seleccionada con cuidado y congelada para preservar sus propiedades.</p>
+                <p class="text-center text-slate-500 text-sm mt-6">Mira cómo cada fruta es seleccionada con cuidado y
+                    congelada para preservar sus propiedades.</p>
             </div>
         </div>
     </section>
@@ -433,9 +456,11 @@
 
             <div class="border-t border-white/10 pt-8">
                 <div class="flex flex-col items-center gap-4 mb-6">
-                    <img src="assets/vallesurlogo.png" alt="Vallesur Logo" class="h-16 w-auto opacity-90 hover:opacity-100 transition-opacity">
+                    <img src="assets/vallesurlogo.png" alt="Vallesur Logo"
+                        class="h-16 w-auto opacity-90 hover:opacity-100 transition-opacity">
                 </div>
-                <p class="text-center text-slate-400 text-sm">&copy; 2026 Vallesur Congelados. Todos los derechos reservados. Realizado con ❤️ para Sol Jazmin Sol.
+                <p class="text-center text-slate-400 text-sm">&copy; 2026 Vallesur Congelados. Todos los derechos
+                    reservados. Realizado con ❤️ para Sol Jazmin Sol.
                 </p>
             </div>
         </div>
@@ -450,7 +475,7 @@
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="cartOpen = false"></div>
 
         <div class="absolute inset-y-0 right-0 max-w-full flex">
-            <div class="w-screen max-w-md" x-show="cartOpen"
+            <div class="w-screen max-w-lg" x-show="cartOpen"
                 x-transition:enter="transform transition ease-in-out duration-500"
                 x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
                 x-transition:leave="transform transition ease-in-out duration-500"
@@ -470,7 +495,7 @@
                                     <template x-for="item in cartItems" :key="item.id">
                                         <li class="py-6 flex">
                                             <div
-                                                class="h-24 w-24 shrink-0 overflow-hidden rounded-2xl border border-slate-200">
+                                                class="h-64 w-64 shrink-0 overflow-hidden rounded-2xl border border-slate-200">
                                                 <img :src="item.image" :alt="item.name"
                                                     class="h-full w-full object-cover">
                                             </div>
@@ -521,12 +546,14 @@
 
                     <div class="border-t border-slate-200 py-6 px-4 sm:px-6 bg-slate-50" x-show="cartItems.length > 0">
                         <!-- Info sobre despacho -->
-                        <div class="mb-6 p-4 rounded-xl" :class="totalWeight >= 10 ? 'bg-secondary/10 border border-secondary/30' : 'bg-primary/10 border border-primary/30'">
+                        <div class="mb-6 p-4 rounded-xl"
+                            :class="totalWeight >= 10 ? 'bg-secondary/10 border border-secondary/30' : 'bg-primary/10 border border-primary/30'">
                             <p class="text-sm font-bold" :class="totalWeight >= 10 ? 'text-secondary' : 'text-primary'">
                                 <span x-text="totalWeight.toFixed(1)"></span> kg en tu carrito
                             </p>
                             <p class="text-xs mt-2" :class="totalWeight >= 10 ? 'text-slate-600' : 'text-slate-600'">
-                                <span x-show="totalWeight >= 10">Despacho a domicilio: $3.000</span>
+                                <span x-show="totalWeight >= 10">Despacho a domicilio: $3.000 <span
+                                        class="font-semibold">(válido a partir de 10 kg)</span></span>
                                 <span x-show="totalWeight < 10">Retiro en San Bernardo (Sin costo)</span>
                             </p>
                         </div>
@@ -683,14 +710,14 @@
                 sendToWhatsApp() {
                     let message = `*NUEVO PEDIDO - VALLESUR*\n\n`;
                     message += `*Cliente:* ${this.checkout.name}\n`;
-                    
+
                     if (this.totalWeight >= 10) {
                         message += `*Dirección de Despacho:* ${this.checkout.address}, ${this.checkout.comuna}\n`;
                         message += `*Tipo de Entrega:* Despacho a Domicilio\n`;
                     } else {
                         message += `*Tipo de Entrega:* Retiro en San Bernardo\n`;
                     }
-                    
+
                     message += `\n*Detalle del Pedido:*\n`;
 
                     this.cartItems.forEach(item => {
@@ -700,7 +727,7 @@
                     message += `\n*Subtotal:* $${this.cartSubtotal.toLocaleString('es-CL')}\n`;
                     message += `*${this.totalWeight >= 10 ? 'Despacho' : 'Retiro'}:* $${this.shippingCost.toLocaleString('es-CL')}\n`;
                     message += `*TOTAL:* $${this.totalAmount.toLocaleString('es-CL')}\n\n`;
-                    
+
                     if (this.totalWeight >= 10) {
                         message += `_Por favor, confírmame los datos para coordinar la entrega._`;
                     } else {
