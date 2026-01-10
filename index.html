@@ -262,6 +262,10 @@
                             <img :src="product.image" :alt="product.name"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div
+                                class="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm">
+                                CON IVA
+                            </div>
+                            <div
                                 class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
                                 $ <span x-text="product.price.toLocaleString('es-CL')"></span> / kg
                             </div>
@@ -525,9 +529,13 @@
                                         <div class="flex gap-3 sm:gap-4">
                                             <!-- Imagen del Producto -->
                                             <div
-                                                class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 flex-shrink-0 overflow-hidden rounded-xl border-2 border-slate-100 shadow-sm">
+                                                class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 flex-shrink-0 overflow-hidden rounded-xl border-2 border-slate-100 shadow-sm relative">
                                                 <img :src="item.image" :alt="item.name"
                                                     class="h-full w-full object-cover">
+                                                <div
+                                                    class="absolute top-1 left-1 sm:top-2 sm:left-2 bg-secondary/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold text-white shadow-sm">
+                                                    CON IVA
+                                                </div>
                                             </div>
 
                                             <!-- Información del Producto -->
@@ -731,9 +739,8 @@
                     { id: 13, name: "Pulpa de Mango", price: 5500, category: "Pulpas", image: "assets/pulpademango.png", description: "Pulpa de mango 100% natural, sin azúcar añadida." }
                 ],
                 faqs: [
-                    { q: "¿Cómo se mantienen congelados los productos durante el despacho?", a: "Utilizamos cajas térmicas y gel pack para asegurar que la cadena de frío no se rompa durante el trayecto a tu hogar.", open: false },
+                    { q: "¿Cómo se mantienen congelados los productos durante el despacho?", a: "Utilizamos vehículos camioneta equipados con cámara de frío para garantizar que la cadena de frío se mantenga intacta durante todo el trayecto hasta tu hogar.", open: false },
                     { q: "¿Cuál es el tiempo de despacho?", a: "Generalmente entregamos en 24-48 horas hábiles una vez confirmado el pedido.", open: false },
-                    { q: "¿Realizan pedidos mayoristas?", a: "¡Sí! Para compras sobre 10kg tenemos precios especiales. Contáctanos por WhatsApp.", open: false },
                     { q: "¿Los productos contienen azúcar añadida?", a: "No, todos nuestros productos son 100% fruta natural sin aditivos ni azúcares.", open: false }
                 ],
 
