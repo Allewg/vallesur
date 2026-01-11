@@ -465,7 +465,7 @@
                         class="h-16 w-auto opacity-90 hover:opacity-100 transition-opacity">
                 </div>
                 <p class="text-center text-slate-400 text-sm">&copy; 2026 Vallesur Congelados. Todos los derechos
-                    reservados. 
+                    reservados.
                 </p>
             </div>
         </div>
@@ -521,7 +521,7 @@
                     </div>
 
                     <!-- Contenido del Carrito -->
-                    <div class="flex-1 overflow-y-auto px-4 sm:px-6 py-6">
+                    <div class="flex-none h-1/2 sm:flex-1 sm:h-auto overflow-y-auto px-4 sm:px-6 py-6">
                         <div class="flow-root">
                             <ul class="-my-4 divide-y divide-slate-200">
                                 <template x-for="item in cartItems" :key="item.id">
@@ -609,7 +609,7 @@
                     </div>
 
                     <!-- Footer del Carrito (Checkout) -->
-                    <div class="flex-shrink-0 border-t border-slate-200 py-4 sm:py-6 px-4 sm:px-6 bg-gradient-to-b from-white to-slate-50"
+                    <div class="flex-1 overflow-y-auto sm:flex-none sm:overflow-visible border-t border-slate-200 py-4 sm:py-6 px-4 sm:px-6 bg-gradient-to-b from-white to-slate-50"
                         x-show="cartItems.length > 0">
                         <!-- Info sobre despacho -->
                         <div class="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl shadow-sm"
