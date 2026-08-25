@@ -351,8 +351,16 @@
                         data-aos="fade-up">
                         <div class="relative h-64 overflow-hidden">
                             <img :src="product.image" :alt="'Comprar ' + product.name + ' congelado'" loading="lazy"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div
+                                :class="[
+                                    product.outOfStock ? 'grayscale opacity-60' : 'group-hover:scale-110',
+                                    product.category === 'Pulpas' ? 'object-contain bg-slate-50 p-2' : 'object-cover'
+                                ]"
+                                class="w-full h-full transition-transform duration-700">
+                            <div x-show="product.outOfStock"
+                                class="absolute top-4 left-4 bg-red-600/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm z-10">
+                                AGOTADO
+                            </div>
+                            <div x-show="!product.outOfStock"
                                 class="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm">
                                 CON IVA
                             </div>
@@ -372,9 +380,12 @@
                             <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors"
                                 x-text="product.name"></h3>
                             <p class="text-slate-500 text-sm mb-6 line-clamp-2" x-text="product.description"></p>
-                            <button @click="addToCart(product)"
-                                class="w-full py-3 bg-slate-100 hover:bg-primary hover:text-white text-primary font-bold rounded-xl transition-all flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-plus w-5 h-5"></i> Agregar al Carrito
+                            <button @click="product.outOfStock ? null : addToCart(product)"
+                                :disabled="product.outOfStock"
+                                :class="product.outOfStock ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-slate-100 hover:bg-primary hover:text-white text-primary'"
+                                class="w-full py-3 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+                                <span x-show="!product.outOfStock" class="flex items-center gap-2"><i class="fa-solid fa-plus"></i> Agregar al Carrito</span>
+                                <span x-show="product.outOfStock" class="flex items-center gap-2"><i class="fa-solid fa-ban"></i> Agotado</span>
                             </button>
                         </div>
                     </div>
@@ -623,7 +634,8 @@
                                             <div
                                                 class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 flex-shrink-0 overflow-hidden rounded-xl border-2 border-slate-100 shadow-sm relative">
                                                 <img :src="item.image" :alt="item.name"
-                                                    class="h-full w-full object-cover">
+                                                    :class="item.category === 'Pulpas' ? 'object-contain bg-slate-50 p-1' : 'object-cover'"
+                                                    class="h-full w-full">
                                                 <div
                                                     class="absolute top-1 left-1 sm:top-2 sm:left-2 bg-secondary/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold text-white shadow-sm">
                                                     CON IVA
@@ -817,18 +829,20 @@
                 },
                 products: [
                     { id: 1, name: "Arándanos", price: 4800, category: "Berries", image: "assets/arandanos.jpeg", description: "Arándanos seleccionados de primera calidad, 100% naturales y congelados." },
-                    { id: 2, name: "Frambuesas Enteras", price: 6800, category: "Berries", image: "assets/frambuezagrande.jpeg", description: "Frambuesas rojas y jugosas, ideales para postres y batidos." },
+                    { id: 2, name: "Frambuesas Enteras", price: 7000, category: "Berries", image: "assets/frambuezagrande.jpeg", description: "Frambuesas rojas y jugosas, ideales para postres y batidos." },
                     { id: 3, name: "Frambuesas Crumble", price: 5500, category: "Berries", image: "assets/frambuezapicada.jpeg", description: "Frambuesas picadas premium, ideales para crumbles, tartas y decoración de postres gourmet." },
-                    { id: 4, name: "Frutillas", price: 3500, category: "Berries", image: "assets/frutillas.png", description: "Frutillas dulces y aromáticas, seleccionadas manualmente." },
-                    { id: 5, name: "Mix 4 Berries", price: 4500, category: "Berries", image: "assets/mixberries.jpeg", description: "Combinación perfecta de arándanos, frambuesas, frutillas y moras." },
-                    { id: 6, name: "Morón Cultivado", price: 3000, category: "Berries", image: "assets/moroncultivado.png", description: "Moras cultivadas de primera calidad, dulces y jugosas." },
-                    { id: 7, name: "Mango", price: 5300, category: "Frutas Tropicales", image: "assets/mango.jpeg", description: "Mango en cubos, listo para consumir o preparar jugos tropicales." },
+                    { id: 4, name: "Frutillas", price: 3800, category: "Berries", image: "assets/frutillas.png", description: "Frutillas dulces y aromáticas, seleccionadas manualmente." },
+                    { id: 5, name: "Mix 4 Berries", price: 5000, category: "Berries", image: "assets/mixberries.jpeg", description: "Combinación perfecta de arándanos, frambuesas, frutillas y moras." },
+                    { id: 6, name: "Morón Cultivado", price: 4000, category: "Berries", image: "assets/moroncultivado.png", description: "Moras cultivadas de primera calidad, dulces y jugosas." },
+                    { id: 7, name: "Mango", price: 5500, category: "Frutas Tropicales", image: "assets/mango.jpeg", description: "Mango en cubos, listo para consumir o preparar jugos tropicales." },
                     { id: 8, name: "Maracuyá", price: 6800, category: "Frutas Tropicales", image: "assets/maracuya.png", description: "Maracuyá con pepas, sabor intenso y natural." },
-                    { id: 9, name: "Melón Tuna", price: 3000, category: "Frutas Tropicales", image: "assets/melontuna.png", description: "Melón tuna en trozos, refrescante y natural." },
-                    { id: 10, name: "Melón Calameño", price: 3000, category: "Frutas Tropicales", image: "assets/meloncalameño.png", description: "Melón calameño en trozos, refrescante y natural." },
-                    { id: 11, name: "Kiwi", price: 3000, category: "Frutas Tropicales", image: "assets/kiwi.png", description: "Kiwi en rodajas, perfecto para smoothies y ensaladas de frutas." },
+                    { id: 9, name: "Melón Tuna", price: 4000, category: "Frutas Tropicales", image: "assets/melontuna.png", description: "Melón tuna en trozos, refrescante y natural." },
+                    { id: 10, name: "Melón Calameño", price: 4000, category: "Frutas Tropicales", image: "assets/meloncalameño.png", description: "Melón calameño en trozos, refrescante y natural." },
+                    { id: 11, name: "Kiwi", price: 3000, category: "Frutas Tropicales", image: "assets/kiwi.png", description: "Kiwi en rodajas, perfecto para smoothies y ensaladas de frutas.", outOfStock: true },
                     { id: 12, name: "Piña", price: 5000, category: "Frutas Tropicales", image: "assets/piña.png", description: "Piña congelada en trozos, tropical y refrescante, perfecta para batidos y postres." },
-                    { id: 13, name: "Pulpa de Mango", price: 5500, category: "Pulpas", image: "assets/pulpademango.png", description: "Pulpa de mango 100% natural, sin azúcar añadida." }
+                    { id: 13, name: "Pulpa de Mango", price: 5500, category: "Pulpas", image: "assets/pulpademango.png", description: "Pulpa de mango 100% natural, sin azúcar añadida." },
+                    { id: 14, name: "Pulpa de Arándanos", price: 3500, category: "Pulpas", image: "assets/pulpadearandano.png", description: "Pulpa de arándanos 100% natural, sin azúcar añadida." },
+                    { id: 15, name: "Pulpa de Chirimoya con Azúcar", price: 6500, category: "Pulpas", image: "assets/pulpadechirimoya.png", description: "Pulpa de chirimoya premium, endulzada." }
                 ],
                 faqs: [
                     { q: "¿Cómo se mantienen congelados los productos durante el despacho?", a: "Utilizamos vehículos camioneta equipados con cámara de frío para garantizar que la cadena de frío se mantenga intacta durante todo el trayecto hasta tu hogar.", open: false },
