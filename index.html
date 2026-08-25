@@ -380,7 +380,7 @@
                             <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors"
                                 x-text="product.name"></h3>
                             <p class="text-slate-500 text-sm mb-6 line-clamp-2" x-text="product.description"></p>
-                            <button @click="product.outOfStock ? null : addToCart(product)"
+                            <button @click="addToCart(product)"
                                 :disabled="product.outOfStock"
                                 :class="product.outOfStock ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-slate-100 hover:bg-primary hover:text-white text-primary'"
                                 class="w-full py-3 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
@@ -881,6 +881,7 @@
                 },
 
                 addToCart(product) {
+                    if (product.outOfStock) return;
                     const existing = this.cartItems.find(item => item.id === product.id);
                     if (existing) {
                         existing.quantity++;
