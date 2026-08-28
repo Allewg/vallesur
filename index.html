@@ -351,16 +351,8 @@
                         data-aos="fade-up">
                         <div class="relative h-64 overflow-hidden">
                             <img :src="product.image" :alt="'Comprar ' + product.name + ' congelado'" loading="lazy"
-                                :class="[
-                                    product.outOfStock ? 'grayscale opacity-60' : 'group-hover:scale-110',
-                                    product.category === 'Pulpas' ? 'object-contain bg-slate-50 p-2' : 'object-cover'
-                                ]"
-                                class="w-full h-full transition-transform duration-700">
-                            <div x-show="product.outOfStock"
-                                class="absolute top-4 left-4 bg-red-600/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm z-10">
-                                AGOTADO
-                            </div>
-                            <div x-show="!product.outOfStock"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div
                                 class="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm">
                                 CON IVA
                             </div>
@@ -380,13 +372,15 @@
                             <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors"
                                 x-text="product.name"></h3>
                             <p class="text-slate-500 text-sm mb-6 line-clamp-2" x-text="product.description"></p>
-                            <button @click="addToCart(product)"
-                                :disabled="product.outOfStock"
-                                :class="product.outOfStock ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-slate-100 hover:bg-primary hover:text-white text-primary'"
-                                class="w-full py-3 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
-                                <span x-show="!product.outOfStock" class="flex items-center gap-2"><i class="fa-solid fa-plus"></i> Agregar al Carrito</span>
-                                <span x-show="product.outOfStock" class="flex items-center gap-2"><i class="fa-solid fa-ban"></i> Agotado</span>
+                            <button x-show="!product.outOfStock" @click="addToCart(product)"
+                                class="w-full py-3 bg-slate-100 hover:bg-primary hover:text-white text-primary font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-plus w-5 h-5"></i> Agregar al Carrito
                             </button>
+
+                            <div x-show="product.outOfStock"
+                                class="w-full py-3 bg-slate-200 text-slate-400 font-bold rounded-xl flex items-center justify-center gap-2 cursor-not-allowed">
+                                <i class="fa-solid fa-ban w-5 h-5"></i> Agotado
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -634,8 +628,7 @@
                                             <div
                                                 class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 flex-shrink-0 overflow-hidden rounded-xl border-2 border-slate-100 shadow-sm relative">
                                                 <img :src="item.image" :alt="item.name"
-                                                    :class="item.category === 'Pulpas' ? 'object-contain bg-slate-50 p-1' : 'object-cover'"
-                                                    class="h-full w-full">
+                                                    class="h-full w-full object-cover">
                                                 <div
                                                     class="absolute top-1 left-1 sm:top-2 sm:left-2 bg-secondary/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold text-white shadow-sm">
                                                     CON IVA
@@ -827,7 +820,7 @@
                     address: '',
                     comuna: ''
                 },
-                products: [
+                 products: [
                     { id: 1, name: "Arándanos", price: 4800, category: "Berries", image: "assets/arandanos.jpeg", description: "Arándanos seleccionados de primera calidad, 100% naturales y congelados." },
                     { id: 2, name: "Frambuesas Enteras", price: 7000, category: "Berries", image: "assets/frambuezagrande.jpeg", description: "Frambuesas rojas y jugosas, ideales para postres y batidos." },
                     { id: 3, name: "Frambuesas Crumble", price: 5500, category: "Berries", image: "assets/frambuezapicada.jpeg", description: "Frambuesas picadas premium, ideales para crumbles, tartas y decoración de postres gourmet." },
@@ -881,7 +874,6 @@
                 },
 
                 addToCart(product) {
-                    if (product.outOfStock) return;
                     const existing = this.cartItems.find(item => item.id === product.id);
                     if (existing) {
                         existing.quantity++;
